@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-关闭</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="__wesketch_export" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-关闭">
+            <g>
+                <rect id="Rectangle-7" x="0" y="0" width="16" height="16"></rect>
+                <path d="M10.6066017,7.77817459 L15.5563492,2.82842712 L12.7279221,5.32907052e-15 L7.77817459,4.94974747 L2.82842712,5.32907052e-15 L-5.10702591e-14,2.82842712 L4.94974747,7.77817459 L-4.97379915e-14,12.7279221 L2.82842712,15.5563492 L7.77817459,10.6066017 L12.7279221,15.5563492 L15.5563492,12.7279221 L10.6066017,7.77817459 Z" id="Combined-Shape" fill="#B6B6B6"></path>
+            </g>
+        </g>
+    </g>
+</svg>

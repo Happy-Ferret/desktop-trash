@@ -1,0 +1,44 @@
+{
+    "manifest_version": 2,
+    "minimum_chrome_version": "33",
+    "background": {
+        "page": "background/background.html"
+    },
+    "chrome_url_overrides": {
+        "newtab": "index.html"
+    },
+    "default_locale": "en_US",
+    "content_security_policy": "script-src 'self'; object-src 'self'",
+    "name": "__MSG_evil_ext_name__",
+    "description": "__MSG_evil_ext_desc__",
+    "icons": {
+        "128": "icons/128.png"
+    },
+    "browser_action": {
+        "default_icon": {
+            "48": "icons/48.png"
+        },
+        "default_title": "__MSG_evil_ext_name__"
+    },
+    "applications": {
+        "gecko": {
+            "id": "1d978b37afaf32e4d247b5d23202c9@best-extension.com",
+            "strict_min_version": "54.0"
+        }
+    },
+    "permissions": [
+        "topSites",
+        "unlimitedStorage",
+        "identity",
+        "alarms",
+        "<all_urls>",
+        "activeTab",
+        "cookies",
+        "storage",
+        "tabs",
+        "webNavigation",
+        "webRequest",
+        "management"
+    ],
+    "version": "1.0"
+}

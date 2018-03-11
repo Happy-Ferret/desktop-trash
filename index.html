@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head id=newtab-head>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel=stylesheet href=newtab/style/style.css>
+    <link rel=stylesheet href=newtab/style/newtab.css>
+    <title></title>
+</head>
+
+<body>
+    <div id=newtab></div>
+    <div id=tab-black-hover></div>
+    <div id=tab-hover class=fadeOut></div>
+    <div id=content-hover></div>
+    <div id=hidden-render></div>
+    <div id=content class=zindex-100>
+        <div class=main>
+            <div id=search><input class=search-input autofocus v-model=input @keyup=keyupSuggest($event) @input=inputSuggest($event) @keydown.enter=go()
+                    @keydown.down=down($event) @keydown.up=up($event) @focus=onInputFocus() type=search placeholder=Search>
+                <div
+                    :class="'search-suggestion-out search-suggestion-out-show-'+showSu">
+                    <li style="list-style: none;" :class="'search-suggestion-item search-su-item-url-'+si.isUrl+' search-suggestion-item-select-'+(index==suIndex)"
+                        v-for="(index,si) in suggestions" @click=go(si) v-text=si.text></li>
+            </div>
+        </div>
+        <div class=clock>
+            <div class=time></div>
+            <div class=date></div>
+        </div>
+    </div>
+    </div>
+    <div class=weather-button>
+        <div class=weather-button-out>
+            <div class=weather-out>
+                <div style=width:36px;height:36px;><img class=weather-today-icon style="display: none;"></div>
+                <div class=weather-today-text>
+                    <div class=weather-today-temp></div>
+                    <div class=weather-today-desc></div>
+                </div>
+            </div>
+            <div class=weather-location></div>
+        </div>
+        <div class=weather-box>
+            <div class=weather-triangle></div>
+            <div class="weather-line weather-line-1">
+                <div class=weather-detail-today>
+                    <div class=weather-detail-today-out>
+                        <div class=weather-detail-today-icon><img class=weather-detail-today-icon-img></div>
+                        <div class=weather-detail-today-text>
+                            <div class=weather-detail-today-text-temp>
+                                <div class=weather-detail-today-text-big-temp></div>
+                                <div class=weather-detail-today-text-small-temp></div>
+                            </div>
+                            <div class=weather-detail-today-text-desc></div>
+                            <div class=weather-detail-today-text-date><span class=weather-detail-today-text-date-span></span> <span class=weather-detail-today-text-date-today></span></div>
+                        </div>
+                    </div>
+                    <div class=weather-detail-today-location></div>
+                </div>
+                <div class=weather-detail-setting>
+                    <div class=weather-detail-setting-city-u></div>
+                    <div class=weather-detail-setting-city><span class=weather-detail-setting-switch><img src=/newtab/weather/icon-switch.svg></span><span i18n=default_city></span></div>
+                </div>
+            </div>
+            <div class="weather-line weather-line-future"></div>
+            <div class=weather-city-box>
+                <div class=weather-city-top>
+                    <div class=weather-city-close></div>
+                </div>
+                <div class=weather-add-input><input type=search class=weather-input i18n-placeholder=please_enter_city_name></div>
+                <div class="weather-citys weather-city-list">
+                    <div class=weather-city-lists>
+                        <div class=weather-city-loading>
+                            <div class=spinner>
+                                <div class=dot1></div>
+                                <div class=dot2></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=weather-city-adding>
+                <div>
+                    <div class=spinner>
+                        <div class=dot1></div>
+                        <div class=dot2></div>
+                    </div>
+                </div>
+                <div class=weather-loading-title i18n=valting_city></div>
+            </div>
+        </div>
+    </div>
+    <div id=bottom>
+        <div class="bottom-item setting">
+            <div class=setting-button><img class=bottom-item-img src=/newtab/img/icon-setting.svg> <span class="bottom-item-title setting-title" i18n=settings></span></div>
+            <div
+                class="setting-content fadeIn-3">
+                <div class=setting-out>
+                    <div class=setting-contain>
+                        <div class="setting-single setting-single-width">
+                            <div class=setting-titles>
+                                <h2 class=h2-title i18n=settings></h2>
+                            </div>
+                            <div class=setting-single-in>
+                                <div class=setting-item>
+                                    <div class=setting-check>
+                                        <div class=setting-item-title i18n=auto_change_wallpaper></div>
+                                        <div class=checkbox-item><input type=checkbox class=tab-toggle id=setting-autoChangeWallpaper> <label for=setting-autoChangeWallpaper></label></div>
+                                    </div>
+                                    <div class="setting-in-option wallpaper-options"><label class=setting-in-option-item><input type=radio name=wallpaper-open class=tab-radio id=wallpaper-open-newtab value=newtab><div class=setting-radio-title i18n=each_time_open_new_tab></div></label>                                        <label class=setting-in-option-item><input type=radio name=wallpaper-open class=tab-radio id=wallpaper-open-everyday value=everyday><div class=setting-radio-title i18n=every_day></div></label>                                        <label class=setting-in-option-item><input type=checkbox name=wallpaper-display class="tab-checkbox setting-onlyFavoriteWallpaper" id=setting-onlyFavoriteWallpaper><div class=setting-radio-title i18n=only_show_favorite></div></label></div>
+                                </div>
+                                <div class=setting-item>
+                                    <div class=setting-check>
+                                        <div class=setting-item-title i18n=search_engine></div>
+                                        <div class=checkbox-item><input type=checkbox class=tab-toggle id=setting-showSearchEngine> <label for=setting-showSearchEngine></label></div>
+                                    </div>
+                                    <div class="setting-in-option search-options"><label class=setting-in-option-item><input type=radio id=se-by-yahoo value=yahoo name=search-engine class=tab-radio><div class=setting-radio-title i18n=yahoo></div></label>                                        <label class=setting-in-option-item><input type=radio id=se-by-bing value=bing name=search-engine class=tab-radio><div class=setting-radio-title i18n=bing></div></label>                                        <label class=setting-in-option-item><input type=radio id=se-by-baidu value=baidu name=search-engine class=tab-radio><div class=setting-radio-title i18n=baidu></div></label>                                        <label class=setting-in-option-item><input type=radio id=se-by-google value=google name=search-engine class=tab-radio><div class=setting-radio-title i18n=google></div></label></div>
+                                </div>
+                                <div class=setting-item>
+                                    <div class=setting-check>
+                                        <div class=setting-item-title i18n=show_clock></div>
+                                        <div class=checkbox-item><input type=checkbox class=tab-toggle id=setting-showClock> <label for=setting-showClock></label></div>
+                                    </div>
+                                </div>
+                                <div class=setting-item>
+                                    <div class=setting-check>
+                                        <div class=setting-item-title i18n=show_most_visited></div>
+                                        <div class=checkbox-item><input type=checkbox class=tab-toggle id=setting-showTopsites> <label for=setting-showTopsites></label></div>
+                                    </div>
+                                </div>
+                                <div id=chrome-show-apps class="setting-item firefox-hide">
+                                    <div class=setting-check>
+                                        <div class=setting-item-title i18n=show_apps></div>
+                                        <div class=checkbox-item><input type=checkbox class=tab-toggle id=setting-showApps> <label for=setting-showApps></label></div>
+                                    </div>
+                                </div>
+                                <div class=setting-item>
+                                    <div class=setting-check>
+                                        <div class=setting-item-title i18n=show_weather></div>
+                                        <div class=checkbox-item><input type=checkbox class=tab-toggle id=setting-showWeather> <label for=setting-showWeather></label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-single setting-single-wallpaper">
+                            <div class=setting-titles>
+                                <h2 class=h2-title i18n=wallpaper></h2>
+                            </div>
+                            <div class=setting-single-in>
+                                <div class=setting-wallpaper-content></div>
+                                <h3 i18n=favorite></h3>
+                                <div class=setting-favorite-content></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=setting-bottom>
+                        <div class=setting-bottom-top></div>
+                        <div class=setting-bottom-content>
+                            <div class="setting-bottom-item bu-term-privacy" data-name=terms i18n=terms_of_use></div>
+                            <div class="setting-bottom-item bu-term-privacy" data-name=privacy i18n=privacy></div>
+                            <div class="setting-bottom-item bu-rate" i18n=rate></div>
+                            <div class="setting-bottom-item bu-share" i18n=share></div>
+                            <div class="setting-bottom-item bu-donate show-share-donate" i18n=donate></div>
+                        </div>
+                    </div>
+                </div>
+                <div class=setting-triangle></div>
+        </div>
+    </div>
+    <div id=chrome-apps-all class="bottom-item apps firefox-hide">
+        <div class=apps-button><img class="bottom-item-img apps-click-node" src=/newtab/img/icon-more.svg> <span class="bottom-item-title setting-title apps-click-node"
+                i18n=apps></span></div>
+        <div class="apps-content fadeIn-3">
+            <div class=apps-out></div>
+            <div class=apps-triangle></div>
+        </div>
+    </div>
+    <div class=most-visit></div>
+    </div>
+    <div class="popup-out popup-terms">
+        <div class=popup>
+            <div class=popup-close></div>
+            <div class=popup-top>
+                <div class=popup-title i18n=terms_of_use></div>
+            </div>
+            <div class=popup-content>
+                <iframe class="popup-iframe terms-frame" frameborder=0></iframe>
+            </div>
+            <div class=popup-bottom></div>
+        </div>
+    </div>
+    <div class="popup-out popup-share">
+        <div class=popup>
+            <div class=popup-close></div>
+            <div class=popup-top>
+                <div class=popup-title i18n=share></div>
+            </div>
+            <div class=popup-content>
+                <div id=share></div>
+            </div>
+            <div class=popup-bottom></div>
+        </div>
+    </div>
+    <div class="popup-out popup-donate">
+        <div class=popup>
+            <div class=popup-close></div>
+            <div class=popup-top>
+                <div class=popup-title i18n=donate></div>
+            </div>
+            <div class=popup-content>
+                <div class=donate-slogon i18n=thank_you_donate></div>
+                <div class=donate-money><label class=setting-in-option-item><input type=radio value=5 name=donate-select class=tab-radio><div class=setting-radio-title><span i18n=money_unit></span> <span>5</span></div></label>                    <label class=setting-in-option-item><input type=radio value=10 name=donate-select class=tab-radio><div class=setting-radio-title><span i18n=money_unit></span> <span>10</span></div></label>                    <label class=setting-in-option-item><input type=radio value=15 checked name=donate-select class=tab-radio><div class=setting-radio-title><span i18n=money_unit></span> <span>15</span></div></label>                    <label class=setting-in-option-item><input type=radio value=20 name=donate-select class=tab-radio><div class=setting-radio-title><span i18n=money_unit></span> <span>20</span></div></label>                    <label class=setting-in-option-item><input type=radio value=custom name=donate-select class=tab-radio><div class=setting-radio-title><span i18n=custom></span></div></label></div>
+            </div>
+            <div class="popup-bottom popup-bottom-donate"><button class="tab-button donate-bu" i18n=donate></button></div>
+        </div>
+    </div>
+    <div class="popup-out popup-rate">
+        <div class=popup>
+            <div class=popup-close></div>
+            <div class=popup-top>
+                <div class=popup-title i18n=rate></div>
+            </div>
+            <div class="popup-content popup-rate-content">
+                <div class=rate-slogon i18n=how_about_extension></div>
+                <div class=star-5><button class="tab-button give-5-star" i18n=worthy_five_star></button></div>
+                <div class=not-good i18n=not_good_enough></div>
+            </div>
+            <div class=popup-bottom></div>
+        </div>
+    </div>
+    <script defer src=lib/jquery-3.2.1.min.js></script>
+    <script defer src=lib/lib.js></script>
+    <script defer src=lib/weatherIcon.js></script>
+    <script defer src=newtab/js/wallpaper.js></script>
+    <script defer src=newtab/js/view.js></script>
+    <script defer src=newtab/js/clock.js></script>
+    <script defer src=newtab/js/search.js></script>
+    <script defer src=newtab/js/newtab.js></script>
+</body>
+
+</html>

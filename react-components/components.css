@@ -1,0 +1,13 @@
+#clock {
+    font-size: 1.3rem;
+    line-height: 3.2rem;
+    padding: 0 1rem;
+    user-select: none;
+    -moz-user-select: none;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .main-content {
+    background-image: url("https://source.unsplash.com/1920x1080/?kitten,cat");
+  }

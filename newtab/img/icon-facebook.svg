@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-facebook</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="newtab-terms-of-use" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-273.000000, -739.000000)">
+        <g id="icon-facebook" transform="translate(273.000000, 739.000000)">
+            <circle id="Oval-4" fill="#43609C" cx="24" cy="24" r="24"></circle>
+            <g id="Popular_Facebook_" transform="translate(15.000000, 8.000000)" fill="#FFFFFF">
+                <path d="M14,6 L17.986,5.871 L18,0 L13,0 C6.681,0.056 5,3.428 5,8 L5,11 L0,11 L0,17 L5,17 L5,33 L12,33 L12,17 L18,17 L17.986,11.034 L12,11 L12,8 C12,6.905 11.764,6.113 14,6 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
